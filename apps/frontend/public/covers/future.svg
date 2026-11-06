@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><defs>
+<linearGradient id="sky" x2="0" y2="1"><stop stop-color="#90b7a4"/><stop offset=".7" stop-color="#e2d6a2"/><stop offset="1" stop-color="#f1d6a0"/></linearGradient>
+<linearGradient id="purple" x2=".8" y2="1"><stop stop-color="#302c55"/><stop offset="1" stop-color="#a881a8"/></linearGradient>
+<linearGradient id="ocean" x2="0" y2="1"><stop stop-color="#98c9c6"/><stop offset="1" stop-color="#1c656a"/></linearGradient>
+<linearGradient id="night" x2="0" y2="1"><stop stop-color="#202b4c"/><stop offset="1" stop-color="#c78691"/></linearGradient>
+<linearGradient id="earth" x2=".7" y2="1"><stop stop-color="#d4ae86"/><stop offset="1" stop-color="#ac745a"/></linearGradient>
+<radialGradient id="sun"><stop stop-color="#fff3be"/><stop offset="1" stop-color="#ebcb85"/></radialGradient>
+<radialGradient id="planet" cx=".3" cy=".2"><stop stop-color="#d5c3ec"/><stop offset=".6" stop-color="#8379b3"/><stop offset="1" stop-color="#343052"/></radialGradient>
+<filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="12" dy="25" stdDeviation="22" flood-color="#201f2428"/></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".055"/></feComponentTransfer><feBlend in="SourceGraphic" mode="soft-light"/></filter>
+</defs><g filter="url(#grain)"><rect width="1280" height="720" fill="#b1c6bc"/>
+<ellipse cx="665" cy="575" rx="377" ry="60" fill="#718f82" opacity=".3"/>
+<g filter="url(#shadow)"><path d="M360 485V263q0-30 30-30h460q30 0 30 30v222z" fill="#3a5b50"/>
+<rect x="377" y="250" width="486" height="219" rx="5" fill="#d7e4ca"/>
+<circle cx="620" cy="354" r="73" fill="#6d9a81"/><path d="m590 325 65 29-65 30z" fill="#e6edcc"/>
+<path d="m300 485 60 70h520l60-70z" fill="#e0e7d4"/><path d="m536 485 18 29h132l18-29" fill="#a7bcb0"/>
+<rect x="960" y="317" width="95" height="215" rx="19" fill="#2b5043"/><rect x="969" y="335" width="77" height="171" rx="8" fill="#9cba9a"/><circle cx="1007" cy="422" r="22" fill="#d6e6b6"/>
+<circle cx="264" cy="480" r="63" fill="#d4d9c0"/><circle cx="264" cy="467" r="50" fill="#e9ead8"/></g></g></svg>

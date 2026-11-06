@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><defs>
+<linearGradient id="sky" x2="0" y2="1"><stop stop-color="#90b7a4"/><stop offset=".7" stop-color="#e2d6a2"/><stop offset="1" stop-color="#f1d6a0"/></linearGradient>
+<linearGradient id="purple" x2=".8" y2="1"><stop stop-color="#302c55"/><stop offset="1" stop-color="#a881a8"/></linearGradient>
+<linearGradient id="ocean" x2="0" y2="1"><stop stop-color="#98c9c6"/><stop offset="1" stop-color="#1c656a"/></linearGradient>
+<linearGradient id="night" x2="0" y2="1"><stop stop-color="#202b4c"/><stop offset="1" stop-color="#c78691"/></linearGradient>
+<linearGradient id="earth" x2=".7" y2="1"><stop stop-color="#d4ae86"/><stop offset="1" stop-color="#ac745a"/></linearGradient>
+<radialGradient id="sun"><stop stop-color="#fff3be"/><stop offset="1" stop-color="#ebcb85"/></radialGradient>
+<radialGradient id="planet" cx=".3" cy=".2"><stop stop-color="#d5c3ec"/><stop offset=".6" stop-color="#8379b3"/><stop offset="1" stop-color="#343052"/></radialGradient>
+<filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="12" dy="25" stdDeviation="22" flood-color="#201f2428"/></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".055"/></feComponentTransfer><feBlend in="SourceGraphic" mode="soft-light"/></filter>
+</defs><g filter="url(#grain)"><rect width="1280" height="720" fill="#e7dfdd"/><path d="M0 530h1280v190H0z" fill="#d4c8cb"/>
+<ellipse cx="700" cy="570" rx="440" ry="65" fill="#aa96a9" opacity=".2"/>
+<g filter="url(#shadow)"><path d="M330 552V300a180 180 0 0 1 360 0v252H590V300a80 80 0 0 0-160 0v252z" fill="#f5ece0"/>
+<rect x="710" y="330" width="220" height="220" rx="4" fill="#9b83ab"/>
+<circle cx="805" cy="252" r="96" fill="#cfb4c7"/>
+<path d="M400 552v-95a68 68 0 0 1 136 0v95z" fill="#776086"/>
+<ellipse cx="1000" cy="553" rx="70" ry="15" fill="#aa96a9"/><path d="M960 550q-35-148 25-217 60 96 15 217" fill="#9caa8e"/><path d="M984 551q-8-74 74-122 3 76-74 122" fill="#bec5a0"/></g></g></svg>

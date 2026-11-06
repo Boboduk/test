@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><defs>
+<linearGradient id="sky" x2="0" y2="1"><stop stop-color="#90b7a4"/><stop offset=".7" stop-color="#e2d6a2"/><stop offset="1" stop-color="#f1d6a0"/></linearGradient>
+<linearGradient id="purple" x2=".8" y2="1"><stop stop-color="#302c55"/><stop offset="1" stop-color="#a881a8"/></linearGradient>
+<linearGradient id="ocean" x2="0" y2="1"><stop stop-color="#98c9c6"/><stop offset="1" stop-color="#1c656a"/></linearGradient>
+<linearGradient id="night" x2="0" y2="1"><stop stop-color="#202b4c"/><stop offset="1" stop-color="#c78691"/></linearGradient>
+<linearGradient id="earth" x2=".7" y2="1"><stop stop-color="#d4ae86"/><stop offset="1" stop-color="#ac745a"/></linearGradient>
+<radialGradient id="sun"><stop stop-color="#fff3be"/><stop offset="1" stop-color="#ebcb85"/></radialGradient>
+<radialGradient id="planet" cx=".3" cy=".2"><stop stop-color="#d5c3ec"/><stop offset=".6" stop-color="#8379b3"/><stop offset="1" stop-color="#343052"/></radialGradient>
+<filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="12" dy="25" stdDeviation="22" flood-color="#201f2428"/></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".055"/></feComponentTransfer><feBlend in="SourceGraphic" mode="soft-light"/></filter>
+</defs><g filter="url(#grain)"><rect width="1280" height="720" fill="url(#ocean)"/>
+<path d="M0 0h1280v170Q950 70 690 154T0 130" fill="#e9d9b5"/>
+<path d="M0 134q350 130 670 34t610 28" stroke="#f8f3da" stroke-width="21" fill="none" opacity=".8"/>
+<path d="M-40 282q350 130 670 34t700 28M-40 457q350 130 670 34t700 28M-40 624q350 130 670 34t700 28" stroke="#c3e5d4" stroke-width="5" fill="none" opacity=".65"/>
+<path d="M-40 296q350 130 670 34t700 28M-40 470q350 130 670 34t700 28" stroke="#eff1d9" stroke-width="2" fill="none" opacity=".4"/>
+<ellipse cx="960" cy="355" rx="52" ry="17" fill="#164d51" opacity=".25"/><path d="m918 334 55-56 49 56z" fill="#fff4d1"/><path d="M973 271v82m-45-14h92l-24 17h-48z" fill="#c48e5d" stroke="#8e7452" stroke-width="3"/></g></svg>

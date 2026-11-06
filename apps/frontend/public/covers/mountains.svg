@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><defs>
+<linearGradient id="sky" x2="0" y2="1"><stop stop-color="#90b7a4"/><stop offset=".7" stop-color="#e2d6a2"/><stop offset="1" stop-color="#f1d6a0"/></linearGradient>
+<linearGradient id="purple" x2=".8" y2="1"><stop stop-color="#302c55"/><stop offset="1" stop-color="#a881a8"/></linearGradient>
+<linearGradient id="ocean" x2="0" y2="1"><stop stop-color="#98c9c6"/><stop offset="1" stop-color="#1c656a"/></linearGradient>
+<linearGradient id="night" x2="0" y2="1"><stop stop-color="#202b4c"/><stop offset="1" stop-color="#c78691"/></linearGradient>
+<linearGradient id="earth" x2=".7" y2="1"><stop stop-color="#d4ae86"/><stop offset="1" stop-color="#ac745a"/></linearGradient>
+<radialGradient id="sun"><stop stop-color="#fff3be"/><stop offset="1" stop-color="#ebcb85"/></radialGradient>
+<radialGradient id="planet" cx=".3" cy=".2"><stop stop-color="#d5c3ec"/><stop offset=".6" stop-color="#8379b3"/><stop offset="1" stop-color="#343052"/></radialGradient>
+<filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="12" dy="25" stdDeviation="22" flood-color="#201f2428"/></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".055"/></feComponentTransfer><feBlend in="SourceGraphic" mode="soft-light"/></filter>
+</defs><g filter="url(#grain)"><rect width="1280" height="720" fill="url(#sky)"/>
+<circle cx="890" cy="198" r="94" fill="url(#sun)"/><circle cx="890" cy="198" r="117" fill="none" stroke="#fff3c0" opacity=".17"/>
+<path d="M0 470 110 330 220 400 470 188 600 335 750 265 875 365 1080 176 1280 353V720H0" fill="#78998a"/>
+<path d="m355 300 115-112 72 84-67-27-33 32-25-12zM1000 263l80-87 76 67-71-18-33 28z" fill="#d0d7b6" opacity=".8"/>
+<path d="M0 540 130 390 288 492 485 339 660 530 780 424 1018 540 1280 358V720H0" fill="#497f70"/>
+<path d="M0 670 220 470 422 605 665 480 883 651 1064 505 1280 596V720H0" fill="#24594f"/>
+<path d="M0 720 230 594 451 720M676 720l184-94 220 94" fill="#19463e"/>
+<path d="M1050 480q-30 60-30 240h45q-34-136-15-240" fill="#839d77"/>
+<path d="M0 695q220-70 460 25" stroke="#b1bc88" stroke-width="3" fill="none" opacity=".3"/>
+<g fill="#244d3f"><path d="m1070 570 42-148 42 148h-25l39 84h-114l40-84z"/><path d="m1180 590 36-126 36 126h-21l34 73h-98l34-73z"/></g></g></svg>
