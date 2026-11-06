@@ -1,0 +1,200 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum VideoStatus {
+  UPLOADING
+  PROCESSING
+  READY
+  FAILED
+}
+
+enum VideoVisibility {
+  PUBLIC
+  UNLISTED
+  PRIVATE
+}
+
+enum ReactionType {
+  LIKE
+  DISLIKE
+}
+
+// Один пользователь владеет одним каналом.
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique @db.VarChar(254)
+  passwordHash String   @db.VarChar(255)
+  handle       String   @unique @db.VarChar(40)
+  displayName  String   @db.VarChar(80)
+  bio          String   @default("") @db.VarChar(2000)
+  avatarKey    String?
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime @updatedAt @db.Timestamptz(3)
+
+  sessions      RefreshSession[]
+  videos        Video[]
+  reactions     VideoReaction[]
+  comments      Comment[]
+  commentLikes  CommentLike[]
+  subscriptions Subscription[] @relation("Subscriber")
+  subscribers   Subscription[] @relation("Channel")
+  history       WatchHistory[]
+  watchLater    WatchLater[]
+}
+
+model RefreshSession {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  tokenHash String    @unique @db.VarChar(64)
+  expiresAt DateTime  @db.Timestamptz(3)
+  revokedAt DateTime? @db.Timestamptz(3)
+  createdAt DateTime  @default(now()) @db.Timestamptz(3)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Video {
+  id              String          @id @default(uuid()) @db.Uuid
+  authorId        String          @db.Uuid
+  title           String          @db.VarChar(200)
+  description     String          @default("") @db.VarChar(10000)
+  // У черновика файл и обложка могут ещё отсутствовать.
+  originalKey     String?
+  thumbnailKey    String?
+  status          VideoStatus     @default(UPLOADING)
+  visibility      VideoVisibility @default(PRIVATE)
+  durationSeconds Float?
+  viewsCount      BigInt          @default(0)
+  publishedAt     DateTime?       @db.Timestamptz(3)
+  createdAt       DateTime        @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime        @updatedAt @db.Timestamptz(3)
+  author          User            @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  renditions      VideoRendition[]
+  tags            VideoTag[]
+  reactions       VideoReaction[]
+  comments        Comment[]
+  history         WatchHistory[]
+  watchLater      WatchLater[]
+
+  @@index([authorId, createdAt, id])
+  @@index([visibility, status, publishedAt, id])
+}
+
+model VideoRendition {
+  id         String @id @default(uuid()) @db.Uuid
+  videoId    String @db.Uuid
+  height     Int
+  storageKey String
+  mimeType   String @db.VarChar(100)
+  sizeBytes  BigInt
+  bitrate    Int
+  video      Video  @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@unique([videoId, height])
+}
+
+model Tag {
+  id     String     @id @default(uuid()) @db.Uuid
+  name   String     @unique @db.VarChar(50)
+  videos VideoTag[]
+}
+
+model VideoTag {
+  videoId String @db.Uuid
+  tagId   String @db.Uuid
+  video   Video  @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  tag     Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([videoId, tagId])
+  @@index([tagId, videoId])
+}
+
+model VideoReaction {
+  userId    String       @db.Uuid
+  videoId   String       @db.Uuid
+  type      ReactionType
+  createdAt DateTime     @default(now()) @db.Timestamptz(3)
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video     Video        @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@id([userId, videoId])
+  @@index([videoId, type])
+}
+
+model Comment {
+  id        String    @id @default(uuid()) @db.Uuid
+  videoId   String    @db.Uuid
+  authorId  String    @db.Uuid
+  parentId  String?   @db.Uuid
+  body      String    @db.VarChar(5000)
+  deletedAt DateTime? @db.Timestamptz(3)
+  createdAt DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime  @updatedAt @db.Timestamptz(3)
+  video     Video     @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  // Составной ключ гарантирует, что ответ относится к тому же видео.
+  parent    Comment?  @relation("Replies", fields: [parentId, videoId], references: [id, videoId], onDelete: NoAction, onUpdate: NoAction)
+  replies   Comment[] @relation("Replies")
+  likes     CommentLike[]
+
+  @@unique([id, videoId])
+  @@index([videoId, parentId, createdAt, id])
+  @@index([parentId, videoId])
+  @@index([authorId])
+}
+
+model CommentLike {
+  userId    String   @db.Uuid
+  commentId String   @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@id([userId, commentId])
+  @@index([commentId])
+}
+
+model Subscription {
+  subscriberId String   @db.Uuid
+  channelId    String   @db.Uuid
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
+  subscriber   User     @relation("Subscriber", fields: [subscriberId], references: [id], onDelete: Cascade)
+  channel      User     @relation("Channel", fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@id([subscriberId, channelId])
+  @@index([channelId])
+}
+
+model WatchHistory {
+  userId          String   @db.Uuid
+  videoId         String   @db.Uuid
+  lastWatchedAt   DateTime @default(now()) @db.Timestamptz(3)
+  positionSeconds Float    @default(0)
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video           Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@id([userId, videoId])
+  @@index([userId, lastWatchedAt, videoId])
+  @@index([videoId])
+}
+
+model WatchLater {
+  userId    String   @db.Uuid
+  videoId   String   @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@id([userId, videoId])
+  @@index([userId, createdAt, videoId])
+  @@index([videoId])
+}
