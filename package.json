@@ -14,7 +14,7 @@
     "start": "npm run start -w @lumo/backend",
     "test": "npm run test --workspaces --if-present",
     "db:generate": "npm run db:generate -w @lumo/backend",
-    "db:migrate": "npm run db:migrate -w @lumo/backend",
+    "db:migrate": "npm run db:migrate -w @lumo/backend --",
     "db:deploy": "npm run db:deploy -w @lumo/backend",
     "db:validate": "npm run db:validate -w @lumo/backend",
     "db:smoke": "npm run db:smoke -w @lumo/backend"
